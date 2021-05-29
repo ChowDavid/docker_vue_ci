@@ -8,6 +8,10 @@ before_install:
 script:
   - docker run davidchow/docker-vue-ci npm run test:unit
 
+before_deploy:
+  - docker build -t davidchow/docker-vue-ci .
+  - docker run -p 80:80 davidchow/docker-vue-ci
+
 deploy:
   provider: elasticbeanstalk
   region: "ap-southeast-2"
